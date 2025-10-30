@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Action Book: Laptop Fix Attempt</title>
+    <title>The Action Book: Super Uniqueness Edition</title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -41,13 +41,14 @@
             width: 100%;
             max-width: 800px; 
             margin: 0 auto; 
-            /* Dihapus: position: relative; z-index: 1; */
         }
         
         .content-wrapper {
             padding: 40px 20px; 
             border-bottom: 1px solid #222;
             overflow: hidden;
+            position: relative; /* Penting untuk z-index */
+            z-index: 1;
         }
         
         .svg-container {
@@ -347,15 +348,115 @@
         }
         
         /* =================================
-           9. IDE BARU #2: "JALUR AKSI" (DIHAPUS SEMENTARA)
-           ================================= */
-        /* #svg-path-section { ... } */
-        /* #svg-path-container { ... } */
-        /* #path-track { ... } */
-        /* #path-progress { ... } */
+           9. IDE BARU #1: "RODA MOMENTUM" (SVG ANIMASI)
+        ================================= */
+        #momentum-wheel-section {
+            min-height: 120vh; /* Tinggi agar animasi scroll terasa */
+            position: relative;
+            background: #0a0a0a;
+            max-width: none;
+            z-index: 1; 
+        }
+        #momentum-wheel-container {
+            position: sticky; 
+            top: 15vh; /* Posisi roda di layar */
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #momentum-wheel-svg {
+            width: 80%;
+            height: 100%;
+            max-width: 400px;
+        }
+        /* Gear/roda akan berputar */
+        #momentum-gear {
+            transform-origin: center;
+            transition: transform 0.2s linear; /* Transisi halus */
+        }
         
         /* =================================
-           10. IDE BARU #3: "KARTU AKSI" (FLIP CARDS)
+           10. IDE BARU #2: "LABIRIN KERAGUAN" (INTERAKTIF)
+        ================================= */
+        #maze-module {
+            background: var(--dark-grey);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+        #maze-module h2 { margin-bottom: 20px; }
+        #maze-svg {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        #maze-svg path {
+            fill: none;
+            stroke: var(--grey-text);
+            stroke-width: 8;
+            stroke-linecap: round;
+            cursor: pointer;
+            transition: stroke 0.3s ease;
+        }
+        #maze-svg path:hover { stroke: var(--dark-blue); }
+        #maze-svg #maze-exit { stroke: var(--gold); } /* Jalur keluar emas */
+        #maze-message {
+            margin-top: 20px;
+            color: var(--grey-text);
+            min-height: 1.5em; /* Ruang untuk pesan */
+        }
+        
+        /* =================================
+           11. IDE BARU #3: "CERMIN AKSI vs ALASAN" (SCROLL TEXT CHANGE)
+        ================================= */
+        #mirror-section {
+            min-height: 120vh; /* Tinggi agar efek scroll terasa */
+            position: relative;
+            z-index: 1;
+        }
+        #mirror-sticky-text {
+            position: sticky;
+            top: 30vh; /* Posisi teks menempel */
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.5s ease;
+        }
+        /* State awal */
+        #mirror-reason { opacity: 1; }
+        #mirror-action { opacity: 0; position: absolute; top: 0; left: 0; width: 100%; padding: 20px; }
+        
+        /* =================================
+           12. IDE BARU #4: "POHON AKSI" (SVG PROGRESIF)
+        ================================= */
+        #growth-tree-section {
+             min-height: 50vh; /* Tidak perlu terlalu tinggi */
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             text-align: center;
+             background: #0a0a0a;
+             max-width: none;
+             z-index: 1;
+        }
+        #growth-tree-section h2 { margin-bottom: 30px; }
+        #growth-tree-svg {
+            width: 200px;
+            height: 250px;
+        }
+        /* Bagian pohon disembunyikan awalnya */
+        #growth-tree-svg .branch, #growth-tree-svg .leaf {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+        
+        /* =================================
+           13. IDE BARU #5: "KARTU AKSI" (FLIP CARDS)
         ================================= */
         #flip-card-gallery {
             text-align: center;
@@ -366,58 +467,19 @@
              font-size: 2.5rem;
              margin-bottom: 30px;
         }
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            perspective: 1000px; 
-        }
-        .flip-card {
-            background-color: transparent;
-            width: 100%;
-            aspect-ratio: 4 / 5; 
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .flip-card-front {
-            background-color: var(--dark-grey);
-            border: 1px dashed var(--grey-text);
-            color: var(--grey-text);
-        }
-        .flip-card-back {
-            background-color: var(--dark-blue);
-            color: white;
-            transform: rotateY(180deg);
-            border: 1px solid var(--dark-blue);
-        }
+        /* ... (CSS Flip Card lainnya tetap sama) ... */
+        .card-grid {display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; perspective: 1000px;}
+        .flip-card {background-color: transparent; width: 100%; aspect-ratio: 4 / 5; border-radius: 8px; cursor: pointer;}
+        .flip-card-inner {position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d;}
+        .flip-card:hover .flip-card-inner {transform: rotateY(180deg);}
+        .flip-card-front, .flip-card-back {position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+        .flip-card-front {background-color: var(--dark-grey); border: 1px dashed var(--grey-text); color: var(--grey-text);}
+        .flip-card-back {background-color: var(--dark-blue); color: white; transform: rotateY(180deg); border: 1px solid var(--dark-blue);}
         .flip-card-back p { color: white; }
         .flip-card-back strong { color: var(--gold); }
         
         /* =================================
-           11. KONTRAK KOMITMEN
+           14. KONTRAK KOMITMEN (+ Audio Echo)
         ================================= */
         #commitment-contract {
             background: var(--dark-grey);
@@ -460,6 +522,7 @@
             padding: 30px;
             border-radius: 8px;
             animation: pop-in 0.5s ease;
+            text-align: center; /* Rata tengah */
         }
         @keyframes pop-in {from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); }}
         #signed-contract p {
@@ -471,9 +534,17 @@
             color: var(--gold);
             font-size: 1.3rem;
         }
+        /* Tombol Echo */
+        #echo-button {
+            margin-top: 30px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+        #echo-button:hover { background: rgba(255, 215, 0, 0.1); }
 
         /* =================================
-           12. RESPONSIVE DESIGN
+           15. RESPONSIVE DESIGN
         ================================= */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
@@ -492,6 +563,9 @@
             #choice-module h2 { font-size: 2rem; }
             .door-button { font-size: 1.2rem; padding: 20px; }
             #flip-card-gallery h2 { font-size: 2rem; }
+            #maze-module h2 { font-size: 1.8rem; }
+            #mirror-sticky-text { font-size: 2rem; }
+            #growth-tree-section h2 { font-size: 1.8rem; }
         }
 
     </style>
@@ -508,171 +582,113 @@
                 <path d="M3 20h18L12 4 3 20z"/>
                 <path d="m8 12 4-4 4 4-6 4h8"/>
             </svg>
-            
             <h1>Sukses tidak datang dari apa yang kamu pikirkan. Tapi dari <span class="highlight">APA YANG KAU LAKUKAN.</span></h1>
         </div>
     </section>
 
     <main>
 
-        <section class="content-wrapper">
-            <h2>Selamat Datang di "Buku" Aksi</h2>
+        <section class="content-wrapper" id="intro-section"> <h2>Selamat Datang di "Buku" Aksi</h2>
             <p>Ini bukan halaman motivasi biasa. Ini adalah perjalanan. Sebuah 'deep scroll' ke dalam satu-satunya hukum yang benar-benar penting. Lupakan 'Law of Attraction'. Lupakan harapan pasif. Di sini, kita hanya percaya pada satu hal: <span class="highlight">Tindakan Nyata.</span></p>
             <p>Teruslah scroll. Setiap bab dirancang untuk mengubah cara pandang Anda. Dan yang lebih penting, mengubah apa yang Anda lakukan setelah menutup browser ini.</p>
         </section>
 
-        <section class="content-wrapper">
-            <h2 class="chapter-title">Bab I: <br>Mitos <span class="highlight">Ide Brilian</span></h2>
-            
-            <div class="svg-container">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5C17.7 10.3 18 9 18 8c0-2.2-1.8-4-4-4-3.1 0-4 4-4 4" stroke="var(--grey-text)" stroke-width="1.5"/>
-                    <path d="M12 20v-4" stroke="var(--grey-text)" stroke-width="1.5"/>
-                    <path d="M8.5 16.5a5 5 0 1 1 7 0" stroke="var(--grey-text)" stroke-width="1.5"/>
-                    <path d="M9 14a3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3" stroke="var(--gold)" stroke-width="2"/>
-                </svg>
+        <section class="content-wrapper" id="bab1-section"> <h2 class="chapter-title">Bab I: <br>Mitos <span class="highlight">Ide Brilian</span></h2>
+            <div class="svg-container"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">...</svg>
             </div>
-            
             <h3>Ide Tidak Ada Harganya</h3>
-            <p>Setiap hari, jutaan ide brilian lahir. Dan setiap hari, jutaan ide brilian mati. Mereka mati dalam diam, di dalam kepala orang-orang yang "menunggu waktu tepat", "menunggu modal", atau "menunggu inspirasi".</p>
-            <p>Sebuah ide, tidak peduli seberapa revolusionernya, memiliki nilai $0 jika hanya tersimpan di otak Anda. Yang membedakan seorang pemimpi dari seorang pencipta adalah satu kata sederhana: *Eksekusi*.</p>
+            <p>...</p>
+            <h3>Kutukan "Nanti"</h3>
+            <p>...</p>
         </section>
         
-        <section id="interactive-slider-section">
-             <h2>Buktikan Sendiri. <span class="highlight">Geser Bar</span> untuk Mengubah Ide Menjadi Aksi.</h2>
-             <div class="comparison-slider">
-                <svg class="image-before" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="var(--grey-text)" stroke-width="2">
-                    <rect x="20" y="20" width="60" height="60" stroke-dasharray="4 4"/>
-                    <line x1="20" y1="40" x2="80" y2="40" stroke-dasharray="2 2"/>
-                    <line x1="20" y1="60" x2="80" y2="60" stroke-dasharray="2 2"/>
-                    <line x1="40" y1="20" x2="40" y2="80" stroke-dasharray="2 2"/>
-                    <line x1="60" y1="20" x2="60" y2="80" stroke-dasharray="2 2"/>
-                    <text x="50" y="55" font-family="Inter, sans-serif" font-size="12" fill="var(--grey-text)" text-anchor="middle">IDE</text>
-                </svg>
-                
-                <div class="image-after-wrapper" id="after-wrapper">
-                    <svg class="image-after" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                        <rect x="20" y="20" width="60" height="60" fill="var(--gold)"/>
-                        <text x="50" y="55" font-family="Inter, sans-serif" font-size="12" fill="var(--background)" font-weight="900" text-anchor="middle">AKSI</text>
+        <section id="interactive-slider-section">...</section>
+        
+        <section id="choice-module" class="content-wrapper">...</section>
+
+        <div id="chapter-2-wrapper" style="display: none;">
+            
+            <section id="momentum-wheel-section">
+                <div id="momentum-wheel-container">
+                    <svg id="momentum-wheel-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--grey-text)" stroke-width="2"/>
+                        <g id="momentum-gear">
+                            <circle cx="50" cy="50" r="30" fill="var(--gold)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(0 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(45 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(90 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(135 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(180 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(225 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(270 50 50)"/>
+                            <path d="M50,10 L55,20 L45,20 Z" fill="var(--gold)" transform="rotate(315 50 50)"/>
+                        </g>
                     </svg>
                 </div>
-
-                <input type="range" min="0" max="100" value="50" class="slider-bar" id="action-slider" aria-label="Geser untuk melihat aksi">
-            </div>
-        </section>
-        
-        <section id="choice-module" class="content-wrapper">
-            <div id="choice-gate">
-                <h2>Anda Tiba di Persimpangan.</h2>
-                <p>Setiap ide membawa Anda ke titik ini. Pilihan ada di tangan Anda.</p>
-                <div class="choice-doors">
-                    <div id="door-action" class="door-button">Bertindak (Sekarang)</div>
-                    <div id="door-delay" class="door-button">Tunda (Nanti)</div>
-                </div>
-            </div>
-            
-            <div id="delay-trap">
-                <div class="loader"></div>
-                <p>Memproses penundaan... <br> Mencari "waktu yang tepat"...</p>
-                <span id="cancel-delay">Batalkan</span>
-            </div>
-        </section>
-
-        <div id="chapter-2-content" style="display: none;"> 
-            
-            <main> 
-                <section class="content-wrapper">
-                    <h2 class="chapter-title">Bab II: <br>Musuh Sebenarnya, <span class="highlight">Kelambanan</span></h2>
-
-                    <div class="svg-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="18" height="18" rx="2" stroke="var(--grey-text)" stroke-width="1.5"/>
-                            <circle cx="12" cy="10" r="2" fill="var(--gold)" stroke="var(--gold)" stroke-width="1.5"/>
-                            <path d="M17 18c0-2.66-2.24-5-5-5s-5 2.34-5 5" fill="var(--gold)" stroke="var(--gold)" stroke-width="1.5"/>
-                        </svg>
-                    </div>
-
-                    <h3>Ini Bukan Malas, Ini Takut</h3>
-                    <p>Kita sering salah mengira kelambanan (procrastination) sebagai kemalasan. Ini salah besar. Kelambanan bukanlah masalah manajemen waktu, ini masalah manajemen emosi. Kita menunda bukan karena kita malas, tapi karena kita <span class="highlight">takut</span>.</p>
-                    
-                    <div class="action-module">
-                        <h3>Hancurkan Kelambanan. <br>Sekarang.</h3>
-                        <p>Jangan hanya membaca. Lakukan. Saya tantang Anda untuk mengambil 5 menit saat ini juga untuk melakukan 1 hal yang Anda tunda.</p>
-                        <div id="timer-display">05:00</div>
-                        <button class="action-button" id="start-timer-btn">Mulai Timer 5 Menit</button>
-                        <p id="timer-done" style="display:none; color: var(--dark-blue); font-weight: bold; margin-top: 15px;">WAKTU HABIS. Selamat, Anda telah bertindak!</p>
-                    </div>
-                </section>
-            </main> 
-        </div> 
-        
-        <section id="flip-card-gallery" class="content-wrapper">
-            <h2>Dinding Aksi <span class="highlight">(Balik Kartu)</span></h2>
-            <div class="card-grid">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>"Saya takut di-judge..."</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>...tapi saya tetap <strong>mengirim email</strong> ke klien pertama saya.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>"Saya merasa 'malas'..."</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>...tapi saya tetap <strong>membereskan meja kerja</strong> saya (aksi 5 menit).</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <h3>"Saya tidak tahu harus mulai dari mana..."</h3>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>...tapi saya tetap <strong>menulis 1 paragraf</strong> rencana saya di Notion.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <main> 
-            <section id="commitment-contract" class="content-wrapper">
-                <h2>Kontrak Komitmen Aksi</h2>
-                
-                <form id="contract-form">
-                    <label for="contract-name">Saya, yang bertanda tangan di bawah ini:</label>
-                    <input type="text" id="contract-name" placeholder="Ketik nama Anda..." required>
-                    <label for="contract-goal">Dengan ini berkomitmen untuk mengambil SATU tindakan berikut:</label>
-                    <input type="text" id="contract-goal" placeholder="Contoh: 'Menyelesaikan 1 modul coding hari ini'..." required>
-                    <button type="submit" class="action-button">Tanda Tangani Kontrak Ini</button>
-                </form>
-                
-                <div id="signed-contract">
-                    <h3>Kontrak Ditandatangani.</h3>
-                    <p>Saya, <strong><span id="signed-name"></span></strong>,</p>
-                    <p>Telah secara sadar berkomitmen untuk mengambil tindakan nyata dan akan menyelesaikan:</p>
-                    <p><strong>"<span id="signed-goal"></span>"</strong></p>
-                    <br>
-                    <p>Tidak ada lagi "nanti". Hanya ada "sekarang".</p>
-                </div>
             </section>
-        </main> 
-    
-    <section class="parallax-transition" id="parallax-1">
-        <h3>Perjalanan Telah Dimulai.</h3>
-    </section>
-    
-    <section class="parallax-transition" id="parallax-2">
-        <h3>Anda Telah Bertindak.</h3>
-    </section>
+            
+            <main> <section class="content-wrapper" id="bab2-section"> <h2 class="chapter-title">Bab II: <br>Musuh Sebenarnya, <span class="highlight">Kelambanan</span></h2>
+                    <div class="svg-container"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">...</svg>
+                    </div>
+                    <h3>Ini Bukan Malas, Ini Takut</h3>
+                    <p>...</p>
+                    <div class="action-module">...</div>
+                </section>
+                
+                <section id="maze-module">
+                    <h2>Keluar dari <span class="highlight">Labirin Keraguan</span></h2>
+                    <p>Pilih jalur yang benar untuk melanjutkan.</p>
+                    <svg id="maze-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path id="maze-wrong1" d="M10 10 H 50 V 30 H 30"/>
+                        <path id="maze-wrong2" d="M10 10 V 90 H 70"/>
+                        <path id="maze-exit" d="M10 10 H 90 V 90 H 10"/> 
+                    </svg>
+                    <div id="maze-message"></div>
+                </section>
+            </main> </div> <section id="mirror-section">
+            <div id="mirror-sticky-text">
+                <span id="mirror-reason">Alasan Saya: <br>"Saya Belum Siap..."</span>
+                <span id="mirror-action">Aksi Saya: <br>"Saya Mulai Sekarang."</span>
+            </div>
+        </section>
+        
+        <section id="growth-tree-section">
+            <h2>Pohon <span class="highlight">Pertumbuhan Aksi</span> Anda</h2>
+            <svg id="growth-tree-svg" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+                <line x1="50" y1="110" x2="50" y2="70" stroke="var(--gold)" stroke-width="4"/>
+                <g class="branch" id="branch1">
+                    <line x1="50" y1="90" x2="30" y2="70" stroke="var(--gold)" stroke-width="3"/>
+                    <circle class="leaf" cx="30" cy="70" r="5" fill="var(--gold)"/>
+                </g>
+                 <g class="branch" id="branch2">
+                    <line x1="50" y1="80" x2="70" y2="60" stroke="var(--gold)" stroke-width="3"/>
+                    <circle class="leaf" cx="70" cy="60" r="5" fill="var(--gold)"/>
+                </g>
+                 <g class="branch" id="branch3">
+                    <line x1="50" y1="70" x2="50" y2="40" stroke="var(--gold)" stroke-width="3"/>
+                    <circle class="leaf" cx="50" cy="40" r="5" fill="var(--gold)"/>
+                </g>
+            </svg>
+        </section>
 
+        <section id="flip-card-gallery" class="content-wrapper">...</section>
+        
+        <main> <section id="commitment-contract" class="content-wrapper">
+                 <h2>Kontrak Komitmen Aksi</h2>
+                 <form id="contract-form">...</form>
+                 <div id="signed-contract">
+                     <h3>Kontrak Ditandatangani.</h3>
+                     <p>Saya, <strong><span id="signed-name"></span></strong>,</p>
+                     <p>...</p>
+                     <p><strong>"<span id="signed-goal"></span>"</strong></p>
+                     <br>
+                     <p>...</p>
+                     <button id="echo-button" class="action-button">Dengarkan Gema Komitmen</button>
+                 </div>
+                 <audio id="commitment-echo" src=""></audio>
+            </section>
+        </main> <section class="parallax-transition" id="parallax-1">...</section>
+    <section class="parallax-transition" id="parallax-2">...</section>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -705,10 +721,9 @@
             let timerInterval;
             if (timerButton) {
                 timerButton.addEventListener('click', () => {
-                    let secondsLeft = 300; // Reset timer
+                    let secondsLeft = 300; 
                     timerButton.disabled = true;
                     timerButton.textContent = "BERJALAN...";
-                    // Pastikan timer sebelumnya dihentikan jika ada
                     if (timerInterval) clearInterval(timerInterval); 
                     timerInterval = setInterval(() => {
                         secondsLeft--;
@@ -727,22 +742,24 @@
                 });
             }
             
-            // --- [4] (DIHAPUS) Text Reassembly & Burner ---
-            
-            // --- [5] IDE BARU #1: "SIMPANG JALAN" ---
+            // --- [4] IDE BARU #1: "SIMPANG JALAN" (PERBAIKAN SCROLL) ---
             const doorAction = document.getElementById('door-action');
             const doorDelay = document.getElementById('door-delay');
             const choiceGate = document.getElementById('choice-gate');
             const delayTrap = document.getElementById('delay-trap');
             const cancelDelay = document.getElementById('cancel-delay');
-            const chapter2Content = document.getElementById('chapter-2-content');
+            const chapter2Wrapper = document.getElementById('chapter-2-wrapper'); // Ganti target ke wrapper
+            const choiceModule = document.getElementById('choice-module'); // Target section simpang jalan
 
             if(doorAction) {
                 doorAction.addEventListener('click', () => {
                     choiceGate.style.display = 'none'; 
                     delayTrap.style.display = 'none'; 
-                    chapter2Content.style.display = 'block'; 
-                    chapter2Content.scrollIntoView({ behavior: 'smooth' });
+                    chapter2Wrapper.style.display = 'block'; 
+                    
+                    // PERBAIKAN: Scroll ke setelah section simpang jalan
+                    const offsetTop = choiceModule.offsetTop + choiceModule.offsetHeight; 
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 });
             }
             if(doorDelay) {
@@ -758,33 +775,111 @@
                 });
             }
             
-            // --- [6] (DIHAPUS) SVG Path Drawing ---
+            // --- [5] IDE BARU #2: "RODA MOMENTUM" ---
+            const gear = document.getElementById('momentum-gear');
+            const momentumSection = document.getElementById('momentum-wheel-section');
+            if(gear && momentumSection) {
+                window.addEventListener('scroll', () => {
+                    const sectionTop = momentumSection.offsetTop;
+                    const sectionHeight = momentumSection.offsetHeight;
+                    const scrollY = window.scrollY;
+                    
+                    // Hitung seberapa jauh user scroll di dalam section ini (0 sampai 1)
+                    let scrollPercent = (scrollY - sectionTop) / (sectionHeight - window.innerHeight);
+                    scrollPercent = Math.max(0, Math.min(1, scrollPercent)); // Batasi 0-1
+                    
+                    // Putar gear berdasarkan scroll (misal, 3 putaran penuh)
+                    const rotation = scrollPercent * 360 * 3; 
+                    gear.style.transform = rotate(${rotation}deg);
+                });
+            }
+
+            // --- [6] IDE BARU #3: "LABIRIN KERAGUAN" ---
+            const mazeExit = document.getElementById('maze-exit');
+            const mazeWrongPaths = document.querySelectorAll('#maze-svg path:not(#maze-exit)');
+            const mazeMessage = document.getElementById('maze-message');
+            const mazeModule = document.getElementById('maze-module');
+
+            if(mazeExit) {
+                mazeExit.addEventListener('click', () => {
+                    mazeMessage.textContent = "Benar! Anda keluar dari keraguan.";
+                    mazeMessage.style.color = 'var(--gold)';
+                    // Scroll ke section berikutnya setelah berhasil
+                    const nextSection = mazeModule.nextElementSibling || mazeModule.parentNode.nextElementSibling;
+                    if(nextSection) {
+                         setTimeout(() => { // Beri jeda sedikit
+                             nextSection.scrollIntoView({ behavior: 'smooth'});
+                         }, 500);
+                    }
+                });
+            }
+            mazeWrongPaths.forEach(path => {
+                path.addEventListener('click', () => {
+                    mazeMessage.textContent = "Jalan buntu. Coba lagi.";
+                    mazeMessage.style.color = 'red';
+                });
+            });
             
-            // --- [7] IDE BARU #4: "KONTRAK KOMITMEN" ---
+            // --- [7] IDE BARU #4: "CERMIN AKSI vs ALASAN" ---
+            const mirrorSection = document.getElementById('mirror-section');
+            const reasonText = document.getElementById('mirror-reason');
+            const actionText = document.getElementById('mirror-action');
+            
+            if(mirrorSection && reasonText && actionText) {
+                window.addEventListener('scroll', () => {
+                    const sectionTop = mirrorSection.offsetTop;
+                    const sectionHeight = mirrorSection.offsetHeight;
+                    const scrollY = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    
+                    // Hitung progress scroll di dalam section (0 sampai 1)
+                    let scrollPercent = (scrollY - sectionTop + windowHeight / 2) / sectionHeight;
+                    scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+                    
+                    // Ubah opacity berdasarkan scroll
+                    reasonText.style.opacity = 1 - scrollPercent;
+                    actionText.style.opacity = scrollPercent;
+                });
+            }
+
+            // --- [8] IDE BARU #5: "POHON AKSI" ---
+            const treeBranches = document.querySelectorAll('#growth-tree-svg .branch');
+            const treeLeaves = document.querySelectorAll('#growth-tree-svg .leaf');
+            const bab1Section = document.getElementById('bab1-section'); // Tandai bagian Bab 1
+            const bab2Section = document.getElementById('bab2-section'); // Tandai bagian Bab 2
+            const contractSection = document.getElementById('commitment-contract'); // Tandai bagian Kontrak
+            
+            if(treeBranches.length > 0 && bab1Section && bab2Section && contractSection) {
+                 const treeObserver = new IntersectionObserver((entries) => {
+                     entries.forEach(entry => {
+                         if(entry.isIntersecting) {
+                             if(entry.target.id === 'bab1-section' && treeBranches[0]) {
+                                 treeBranches[0].style.opacity = '1';
+                             } else if (entry.target.id === 'bab2-section' && treeBranches[1]) {
+                                 treeBranches[1].style.opacity = '1';
+                             } else if (entry.target.id === 'commitment-contract' && treeBranches[2]) {
+                                 treeBranches[2].style.opacity = '1';
+                                 // Tampilkan semua daun saat kontrak tercapai
+                                 treeLeaves.forEach(leaf => leaf.style.opacity = '1');
+                             }
+                         }
+                     });
+                 }, { threshold: 0.5 }); // 50% section terlihat
+                 
+                 treeObserver.observe(bab1Section);
+                 treeObserver.observe(bab2Section);
+                 treeObserver.observe(contractSection);
+            }
+
+            // --- [9] IDE BARU #6: "KONTRAK KOMITMEN" (+ ECHO) ---
             const contractForm = document.getElementById('contract-form');
             const signedContract = document.getElementById('signed-contract');
-            
-            if (contractForm && signedContract) {
+            const echoButton = document.getElementById('echo-button');
+            const commitmentEcho = document.getElementById('commitment-echo');
+            let userCommitmentText = ''; // Simpan teks komitmen
+
+            if (contractForm && signedContract && echoButton && commitmentEcho) {
                 contractForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const name = document.getElementById('contract-name').value;
                     const goal = document.getElementById('contract-goal').value;
-                    
-                    if (name.trim() === '' || goal.trim() === '') {
-                        alert('Harap isi nama dan komitmen Anda.');
-                        return;
-                    }
-                    
-                    document.getElementById('signed-name').textContent = name;
-                    document.getElementById('signed-goal').textContent = goal;
-                    
-                    contractForm.style.display = 'none';
-                    signedContract.style.display = 'block';
-                });
-            }
-            
-        });
-    </script>
-
-</body>
-</html>
