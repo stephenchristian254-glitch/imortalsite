@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Action Book: Ultimate Edition (Fixed)</title>
+    <title>The Action Book: Laptop Fix Attempt</title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
@@ -41,9 +41,7 @@
             width: 100%;
             max-width: 800px; 
             margin: 0 auto; 
-            /* DITAMBAHKAN: Mengangkat 'main' agar bisa diklik */
-            position: relative;
-            z-index: 1;
+            /* Dihapus: position: relative; z-index: 1; */
         }
         
         .content-wrapper {
@@ -104,7 +102,6 @@
             width: 100%;
             height: 6px;
             background: var(--dark-grey);
-            /* DIUBAH: z-index diturunkan agar tidak memblokir klik */
             z-index: 999; 
         }
         #progress-bar {
@@ -130,7 +127,6 @@
             background: linear-gradient(-45deg, #000000, #000033, #0a0a0a, #000000);
             background-size: 400% 400%;
             animation: heroGradient 15s ease infinite;
-            /* DITAMBAHKAN: Mengangkat hero agar bisa diklik */
             z-index: 1;
         }
         @keyframes heroGradient {
@@ -140,7 +136,7 @@
         }
         #hero-content {
              position: relative;
-             z-index: 2; /* z-index ini relatif terhadap #hero */
+             z-index: 2; 
         }
         #hero-content svg {
             width: 120px;
@@ -169,8 +165,8 @@
         #interactive-slider-section {
             background: var(--dark-grey);
             padding: 40px 20px;
-            position: relative; /* DITAMBAHKAN: z-index butuh position */
-            z-index: 2; /* Mengangkat slider */
+            position: relative; 
+            z-index: 2; 
         }
         #interactive-slider-section h2 {
             font-size: 2rem;
@@ -229,8 +225,8 @@
             align-items: center;
             text-align: center;
             max-width: none; 
-            position: relative; /* DITAMBAHKAN */
-            z-index: 1; /* DITAMBAHKAN */
+            position: relative; 
+            z-index: 1; 
         }
         .parallax-transition h3 {
             font-size: 2.5rem;
@@ -259,8 +255,8 @@
             padding: 30px;
             text-align: center;
             margin: 3rem 0;
-            position: relative; /* DITAMBAHKAN */
-            z-index: 5; /* Pastikan di atas 'main' */
+            position: relative; 
+            z-index: 5; 
         }
         .action-module h3 { font-size: 1.8rem; margin-bottom: 20px; }
         #timer-display {
@@ -293,8 +289,8 @@
             border-top: 4px solid var(--dark-blue);
             padding: 40px;
             text-align: center;
-            position: relative; /* DITAMBAHKAN */
-            z-index: 5; /* Pastikan di atas 'main' */
+            position: relative; 
+            z-index: 5; 
         }
         #choice-module h2 {
             font-size: 2.5rem;
@@ -351,47 +347,20 @@
         }
         
         /* =================================
-           9. IDE BARU #2: "JALUR AKSI" (SVG DRAW)
-        ================================= */
-        #svg-path-section {
-            min-height: 150vh; 
-            position: relative;
-            background: #0a0a0a;
-            max-width: none;
-            z-index: 1; /* DITAMBAHKAN */
-        }
-        #svg-path-container {
-            position: sticky; 
-            top: 100px;
-            width: 100%;
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #svg-path-container svg {
-            width: 80%;
-            height: 100%;
-            max-width: 500px;
-        }
-        #path-track {
-            stroke: #222; 
-            stroke-width: 4;
-        }
-        #path-progress {
-            stroke: var(--gold); 
-            stroke-width: 5;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-        }
+           9. IDE BARU #2: "JALUR AKSI" (DIHAPUS SEMENTARA)
+           ================================= */
+        /* #svg-path-section { ... } */
+        /* #svg-path-container { ... } */
+        /* #path-track { ... } */
+        /* #path-progress { ... } */
         
         /* =================================
            10. IDE BARU #3: "KARTU AKSI" (FLIP CARDS)
         ================================= */
         #flip-card-gallery {
             text-align: center;
-            position: relative; /* DITAMBAHKAN */
-            z-index: 5; /* Pastikan di atas 'main' */
+            position: relative; 
+            z-index: 5; 
         }
         #flip-card-gallery h2 {
              font-size: 2.5rem;
@@ -455,8 +424,8 @@
             border-top: 4px solid var(--gold);
             padding: 40px 20px;
             border-radius: 8px;
-            position: relative; /* DITAMBAHKAN */
-            z-index: 5; /* Pastikan di atas 'main' */
+            position: relative; 
+            z-index: 5; 
         }
         #commitment-contract h2 {
             text-align: center;
@@ -609,16 +578,10 @@
             </div>
         </section>
 
-        <div id="chapter-2-content" style="display: none;"> <section id="svg-path-section">
-                <div id="svg-path-container">
-                    <svg viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path id="path-track" d="M50 0 C 100 50, 0 100, 50 150 S 100 200, 50 200" />
-                        <path id="path-progress" d="M50 0 C 100 50, 0 100, 50 150 S 100 200, 50 200" />
-                    </svg>
-                </div>
-            </section>
+        <div id="chapter-2-content" style="display: none;"> 
             
-            <main> <section class="content-wrapper">
+            <main> 
+                <section class="content-wrapper">
                     <h2 class="chapter-title">Bab II: <br>Musuh Sebenarnya, <span class="highlight">Kelambanan</span></h2>
 
                     <div class="svg-container">
@@ -640,7 +603,10 @@
                         <p id="timer-done" style="display:none; color: var(--dark-blue); font-weight: bold; margin-top: 15px;">WAKTU HABIS. Selamat, Anda telah bertindak!</p>
                     </div>
                 </section>
-            </main> </div> <section id="flip-card-gallery" class="content-wrapper">
+            </main> 
+        </div> 
+        
+        <section id="flip-card-gallery" class="content-wrapper">
             <h2>Dinding Aksi <span class="highlight">(Balik Kartu)</span></h2>
             <div class="card-grid">
                 <div class="flip-card">
@@ -676,7 +642,8 @@
             </div>
         </section>
         
-        <main> <section id="commitment-contract" class="content-wrapper">
+        <main> 
+            <section id="commitment-contract" class="content-wrapper">
                 <h2>Kontrak Komitmen Aksi</h2>
                 
                 <form id="contract-form">
@@ -696,7 +663,9 @@
                     <p>Tidak ada lagi "nanti". Hanya ada "sekarang".</p>
                 </div>
             </section>
-        </main> <section class="parallax-transition" id="parallax-1">
+        </main> 
+    
+    <section class="parallax-transition" id="parallax-1">
         <h3>Perjalanan Telah Dimulai.</h3>
     </section>
     
@@ -739,6 +708,8 @@
                     let secondsLeft = 300; // Reset timer
                     timerButton.disabled = true;
                     timerButton.textContent = "BERJALAN...";
+                    // Pastikan timer sebelumnya dihentikan jika ada
+                    if (timerInterval) clearInterval(timerInterval); 
                     timerInterval = setInterval(() => {
                         secondsLeft--;
                         let minutes = Math.floor(secondsLeft / 60);
@@ -751,18 +722,12 @@
                             timerDisplay.textContent = "00:00";
                             timerButton.style.display = 'none';
                             timerDone.style.display = 'block';
-                            // Aktifkan lagi tombolnya jika perlu reset
-                            // timerButton.disabled = false;
-                            // timerButton.textContent = "Mulai Timer 5 Menit";
-                            // timerButton.style.display = 'block';
-                            // timerDone.style.display = 'none';
                         }
                     }, 1000);
                 });
             }
             
-            // --- [4] (Dihapus) FUNGSI BURNER & WALL OF ACTION ---
-            // (Saya hapus sementara agar JS lebih simpel & fokus ke ide baru)
+            // --- [4] (DIHAPUS) Text Reassembly & Burner ---
             
             // --- [5] IDE BARU #1: "SIMPANG JALAN" ---
             const doorAction = document.getElementById('door-action');
@@ -774,49 +739,26 @@
 
             if(doorAction) {
                 doorAction.addEventListener('click', () => {
-                    choiceGate.style.display = 'none'; // Sembunyikan pilihan
-                    delayTrap.style.display = 'none'; // Sembunyikan jebakan
-                    chapter2Content.style.display = 'block'; // Tampilkan Bab 2
-                    // Auto-scroll ke Bab 2
+                    choiceGate.style.display = 'none'; 
+                    delayTrap.style.display = 'none'; 
+                    chapter2Content.style.display = 'block'; 
                     chapter2Content.scrollIntoView({ behavior: 'smooth' });
                 });
             }
             if(doorDelay) {
                 doorDelay.addEventListener('click', () => {
-                    choiceGate.style.display = 'none'; // Sembunyikan pilihan
-                    delayTrap.style.display = 'block'; // Tampilkan jebakan
+                    choiceGate.style.display = 'none'; 
+                    delayTrap.style.display = 'block'; 
                 });
             }
             if(cancelDelay) {
                 cancelDelay.addEventListener('click', () => {
-                    delayTrap.style.display = 'none'; // Sembunyikan jebakan
-                    choiceGate.style.display = 'block'; // Tampilkan pilihan lagi
+                    delayTrap.style.display = 'none'; 
+                    choiceGate.style.display = 'block'; 
                 });
             }
             
-            // --- [6] IDE BARU #2: "JALUR AKSI" (SVG DRAW) ---
-            const path = document.getElementById('path-progress');
-            if (path) {
-                // Set panjang path di awal
-                const pathLength = path.getTotalLength();
-                path.style.strokeDasharray = pathLength;
-                path.style.strokeDashoffset = pathLength;
-
-                window.addEventListener('scroll', () => {
-                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    
-                    // Hitung progress scroll (0 sampai 1)
-                    const scrollProgress = scrollTop / scrollHeight;
-                    
-                    // Gambar path-nya
-                    // Dikalikan 3 agar lebih cepat (sesuaikan angkanya)
-                    const drawLength = pathLength * scrollProgress * 3; 
-                    
-                    // Batasi agar tidak 'overflow'
-                    path.style.strokeDashoffset = Math.max(0, pathLength - drawLength);
-                });
-            }
+            // --- [6] (DIHAPUS) SVG Path Drawing ---
             
             // --- [7] IDE BARU #4: "KONTRAK KOMITMEN" ---
             const contractForm = document.getElementById('contract-form');
